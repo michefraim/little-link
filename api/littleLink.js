@@ -1,5 +1,4 @@
 const express = require("express");
-const fs = require("fs");
 const DataBase = require("../models/database.js");
 const LittleLink = require("../models/littleLink.js");
 const { validateUrl } = require("../utils.js");
@@ -16,7 +15,7 @@ router.get("/", (request, response) => {
 router.get("/:shortUrl", async (request, response) => {
   const { shortUrl } = request.params;
   try {
-    const data = await DataBase.readDataBaseByShortUrl(shortUrl);
+    const data = await DataBase.readDataBaseByUrl(shortUrl, false);
 
     if (data === "Not Found") {
       return response
@@ -30,10 +29,8 @@ router.get("/:shortUrl", async (request, response) => {
 });
 
 router.post("/new", async (request, response) => {
-  //   const { body } = request.body.url;
   const originUrl = request.body.url;
   const originUrlStandardized = removeBackSlash(originUrl);
-  console.log(originUrlStandardized);
 
   if (!validateUrl(originUrlStandardized)) {
     return response
@@ -41,13 +38,13 @@ router.post("/new", async (request, response) => {
       .json({ message: "Bad URL entered", succuss: false });
   }
 
-//   if (!LittleLink.isUrlOnline(originUrlStandardized)) {
-//     return response
-//       .status(400)
-//       .json({ message: "The URL entered is not up", succuss: false });
-//   }
+  if (!LittleLink.isUrlOnline(originUrlStandardized)) {
+    return response
+      .status(400)
+      .json({ message: "The URL entered is not up", succuss: false });
+  }
 
-  if (DataBase.doesUrlAlreadyExists(originUrlStandardized)) {
+  if (await DataBase.doesUrlAlreadyExists(originUrlStandardized)) {
     const responseData = await DataBase.readDataBaseByUrl(
       originUrlStandardized,
       true
@@ -56,7 +53,12 @@ router.post("/new", async (request, response) => {
   }
 
   const littleLink = new LittleLink(originUrlStandardized);
-  await DataBase.addNewData(littleLink);
+  try {
+      await DataBase.addNewData(littleLink);
+  }
+  catch (e) {
+      console.log(e);
+  }
   response.status(200).send(littleLink);
 });
 
