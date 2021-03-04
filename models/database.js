@@ -1,23 +1,20 @@
 "use strict";
-const fs = require("fs")
+const fs = require("fs");
 const { default: axios } = require("axios");
 const randomWords = require("random-words");
 
-class DataBase{
-    static async isUrlOnline(originUrl) {
-        const response = await axios.get(originUrl);
-        return (response.status >= 200 && response.status < 300) ? true : false;
-    }
+module.exports = class DataBase {
 
-    static async doesUrlAlreadyExists(url) {}
+  static async doesUrlAlreadyExists(originUrl) {
 
-    static async postNewUrl(url) {
-        const newData = {
-            "original url": url, 
-            "shorturl-id": randomWords({ exactly: 2, maxLength: 5,  join: '' });
-            "creationDate": new Date()
-        }
-        const fileData = await fsPromises.readFile("./models/database.js");
+  }
 
-    }
-}
+  static async postNewUrl(originUrl, newData) {
+    const fileData = await JSON.parse(
+      fs.fsPromises.readFile("./models/database.js")
+    );
+    fileData.push(newData);
+    fs.fsPromises.writeFile('sample.json', JSON.stringify(fileData, null, 2));
+
+  }
+};
