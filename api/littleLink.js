@@ -2,6 +2,7 @@ const express = require("express");
 const fs = require("fs");
 const DataBase = require("../models/database.js");
 const LittleLink = require("../models/littleLink.js");
+const { urlValidate, removeBackSlash } = require("../utils.js");
 
 const router = express.Router();
 
@@ -25,6 +26,36 @@ router.get("/:shortUrl", async (request, response) => {
   } catch (e) {
     return response.status(500).json({ error: `failed reading the database` });
   }
+});
+
+router.post("/new", async (request, response) => {
+  //   const { body } = request.body.url;
+  const originUrl = request.body.url;
+  const originUrlStandardized = removeBackSlash(originUrl);
+
+  if (!validateUrl(originUrlStandardized)) {
+    return response
+      .status(400)
+      .json({ message: "Bad URL entered", succuss: false });
+  }
+
+  if (!LittleLink.isUrlOnline(originUrlStandardized)) {
+    return response
+      .status(400)
+      .json({ message: "The URL entered is not up", succuss: false });
+  }
+
+  if (DataBase.doesUrlAlreadyExists(originUrlStandardized)) {
+    const responseData = DataBase.readDataBaseByUrl(
+      originUrlStandardized,
+      true
+    );
+   return response.status(200).json(responseData);
+  }
+
+  const littleLink = new LittleLink(originUrlStandardized);
+  DataBase.addNewData(littleLink);
+  response.status(200).send(littleLink);
 });
 
 module.exports = router;

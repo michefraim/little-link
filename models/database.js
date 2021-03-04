@@ -15,16 +15,22 @@ module.exports = class DataBase {
     return fileDataParsed;
   }
 
-  static async readDataBaseByShortUrl(shortUrl) {
+  static async readDataBaseByUrl(url, isOrigin) {
     const fileData = await this.readDataBaseData();
-      const filteredData = fileData.filter((LittleLink) => {
-        return LittleLink.shortUrl === shortUrl.toLowerCase();
+    const urlLowerCased = url.toLowerCase();
+      const filteredData = fileData.filter((data) => {
+          if (isOrigin) {
+              return data.originUrl === urlLowerCased;
+          } else {
+            return data.shortUrl === urlLowerCased;
+          }
       });
       if (filteredData.length === 0) {
         return "Not Found";
       }
       return filteredData;
   }
+
 
   static async doesUrlAlreadyExists(originUrl) {
     const fileData = this.readDataBaseData();
