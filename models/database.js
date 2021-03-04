@@ -16,20 +16,14 @@ module.exports = class DataBase {
   }
 
   static async readDataBaseByShortUrl(shortUrl) {
-    const fileData = this.readDataBaseData();
-    try {
+    const fileData = await this.readDataBaseData();
       const filteredData = fileData.filter((LittleLink) => {
         return LittleLink.shortUrl === shortUrl.toLowerCase();
       });
-
       if (filteredData.length === 0) {
         return "Not Found";
       }
-
       return filteredData;
-    } catch (e) {
-      return `ShortUrl failed ${e}`;
-    }
   }
 
   static async doesUrlAlreadyExists(originUrl) {
