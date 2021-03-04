@@ -2,7 +2,8 @@ const express = require("express");
 const fs = require("fs");
 const DataBase = require("../models/database.js");
 const LittleLink = require("../models/littleLink.js");
-const { urlValidate, removeBackSlash } = require("../utils.js");
+const { validateUrl } = require("../utils.js");
+const { removeBackSlash } = require("../utils.js");
 
 const router = express.Router();
 
@@ -32,6 +33,7 @@ router.post("/new", async (request, response) => {
   //   const { body } = request.body.url;
   const originUrl = request.body.url;
   const originUrlStandardized = removeBackSlash(originUrl);
+  console.log(originUrlStandardized);
 
   if (!validateUrl(originUrlStandardized)) {
     return response
@@ -39,14 +41,14 @@ router.post("/new", async (request, response) => {
       .json({ message: "Bad URL entered", succuss: false });
   }
 
-  if (!LittleLink.isUrlOnline(originUrlStandardized)) {
-    return response
-      .status(400)
-      .json({ message: "The URL entered is not up", succuss: false });
-  }
+//   if (!LittleLink.isUrlOnline(originUrlStandardized)) {
+//     return response
+//       .status(400)
+//       .json({ message: "The URL entered is not up", succuss: false });
+//   }
 
   if (DataBase.doesUrlAlreadyExists(originUrlStandardized)) {
-    const responseData = DataBase.readDataBaseByUrl(
+    const responseData = await DataBase.readDataBaseByUrl(
       originUrlStandardized,
       true
     );
@@ -54,7 +56,7 @@ router.post("/new", async (request, response) => {
   }
 
   const littleLink = new LittleLink(originUrlStandardized);
-  DataBase.addNewData(littleLink);
+  await DataBase.addNewData(littleLink);
   response.status(200).send(littleLink);
 });
 
