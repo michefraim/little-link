@@ -1,16 +1,18 @@
 "use strict";
-const fs = require("fs");
+const fs = require("fs").promises;
 
 module.exports = class DataBase {
   static async readDataBaseData() {
-    try {
-      const fileData = await JSON.parse(
-        fs.fsPromises.readFile("../database.json")
-      );
-      return fileData;
-    } catch (e) {
-      return `database read failed ${e}`;
-    }
+    const fileData = await fs.readFile(
+      "./database.json",
+      "utf8",
+      (error, data) => {
+        if (error) throw error;
+        return;
+      }
+    );
+    const fileDataParsed = JSON.parse(fileData);
+    return fileDataParsed;
   }
 
   static async readDataBaseByShortUrl(shortUrl) {
@@ -23,7 +25,7 @@ module.exports = class DataBase {
       if (filteredData.length === 0) {
         return "Not Found";
       }
-      
+
       return filteredData;
     } catch (e) {
       return `ShortUrl failed ${e}`;
@@ -51,6 +53,7 @@ module.exports = class DataBase {
     }
 
     const fileData = this.readDataBaseData();
+    console.log(fileData);
     fileData.push(newData);
     try {
       await fs.fsPromises.writeFile(
