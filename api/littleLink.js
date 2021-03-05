@@ -6,6 +6,7 @@ const { validateUrl } = require("../utils.js");
 const { removeBackSlash } = require("../utils.js");
 
 const router = express.Router();
+
 router.use(express.json());
 
 router.get("/", (request, response) => {
@@ -51,15 +52,16 @@ router.post("/new", async (request, response) => {
       originUrlStandardized,
       true
     );
-    return response.status(200).json(responseData);
+   return response.status(200).json(responseData);
   }
 
   const littleLink = new LittleLink(originUrlStandardized);
 <<<<<<< HEAD
   try {
-    await DataBase.addNewData(littleLink);
-  } catch (e) {
-    console.log(e);
+      await DataBase.addNewData(littleLink);
+  }
+  catch (e) {
+      console.log(e);
   }
 =======
   await DataBase.addNewData(littleLink);

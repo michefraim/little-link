@@ -6,6 +6,7 @@ const stats = require("./stats");
 const api = express.Router();
 
 api.use("/littleLink", littleLink);
+<<<<<<< HEAD
 // api.use("/stats/", stats);
 // api.get("/stats/:shortUrl", (request, response) => {
 //     // const shortUrl = request.params.shortUrl
@@ -19,5 +20,7 @@ api.get("/stats/:shortUrl", (request, response) => {
   response.redirect('http://localhost:3000/html/stats.html');
 });
 
+=======
+>>>>>>> parent of b24d597 (trying to add stats)
 
 module.exports = api;
