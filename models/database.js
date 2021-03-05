@@ -18,22 +18,21 @@ module.exports = class DataBase {
   static async readDataBaseByUrl(url, isOrigin) {
     const fileData = await this.readDataBaseData();
     const urlLowerCased = url.toLowerCase();
-      const filteredData = fileData.filter((data) => {
-          if (isOrigin) {
-              return data.originUrl === urlLowerCased;
-          } else {
-            return data.shortUrl === urlLowerCased;
-          }
-      });
-      if (filteredData.length === 0) {
-        return "Not Found";
+    const filteredData = fileData.filter((data) => {
+      if (isOrigin) {
+        return data.originUrl === urlLowerCased;
+      } else {
+        return data.shortUrl === urlLowerCased;
       }
-      return filteredData;
+    });
+    if (filteredData.length === 0) {
+      return "Not Found";
+    }
+    return filteredData;
   }
 
-
   static async doesUrlAlreadyExists(originUrl) {
-    const fileData = this.readDataBaseData();
+    const fileData = await this.readDataBaseData();
     try {
       const filteredData = fileData.filter((LittleLink) => {
         return LittleLink.originUrl === originUrl.toLowerCase();
@@ -45,21 +44,17 @@ module.exports = class DataBase {
   }
 
   static async addNewData(newData) {
-    if (this.doesUrlAlreadyExists(newData.originUrl)) {
+    if (await this.doesUrlAlreadyExists(newData.originUrl)) {
       const filteredData = fileData.filter((LittleLink) => {
         return LittleLink.originUrl === originUrl.toLowerCase();
       });
       return filteredData;
     }
 
-    const fileData = this.readDataBaseData();
-    console.log(fileData);
+    const fileData = await this.readDataBaseData();
     fileData.push(newData);
     try {
-      await fs.fsPromises.writeFile(
-        "sample.json",
-        JSON.stringify(fileData, null, 2)
-      );
+      await fs.writeFile("database.json", JSON.stringify(fileData, null, 2));
       return;
     } catch (e) {
       return `Adding data failed ${e}`;
