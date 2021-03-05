@@ -6,7 +6,10 @@ function validateUrl(originUrl) {
 }
 
 function removeBackSlash(originUrl) {
-    return (originUrl.slice(-1) === "/") ? originUrl.slice(0, -1) : originUrl;
+    if (originUrl.slice(-1) !== "/") {
+        return originUrl;
+    }
+    return originUrl.slice(0, -1);
 }
 
 module.exports = {

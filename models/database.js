@@ -33,7 +33,7 @@ module.exports = class DataBase {
 
 
   static async doesUrlAlreadyExists(originUrl) {
-    const fileData = await this.readDataBaseData();
+    const fileData = this.readDataBaseData();
     try {
       const filteredData = fileData.filter((LittleLink) => {
         return LittleLink.originUrl === originUrl.toLowerCase();
@@ -45,18 +45,19 @@ module.exports = class DataBase {
   }
 
   static async addNewData(newData) {
-    if (await this.doesUrlAlreadyExists(newData.originUrl)) {
+    if (this.doesUrlAlreadyExists(newData.originUrl)) {
       const filteredData = fileData.filter((LittleLink) => {
         return LittleLink.originUrl === originUrl.toLowerCase();
       });
       return filteredData;
     }
 
-    const fileData = await this.readDataBaseData();
+    const fileData = this.readDataBaseData();
+    console.log(fileData);
     fileData.push(newData);
     try {
-      await fs.writeFile(
-        "database.json",
+      await fs.fsPromises.writeFile(
+        "sample.json",
         JSON.stringify(fileData, null, 2)
       );
       return;

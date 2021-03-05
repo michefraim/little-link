@@ -8,7 +8,7 @@ module.exports = class LittleLink {
     LittleLink = randomWords({ exactly: 2, maxLength: 5, join: "" })
   ) {
     this.originUrl = originUrl.toLowerCase();
-    this.shortUrl = LittleLink.toLowerCase();
+    this.littlelink = LittleLink.toLowerCase();
     this.creationDate = new Date();
     this.redirectCount = 0;
   }

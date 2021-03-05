@@ -7,10 +7,13 @@
 // }
 
 function removeBackSlash(originUrl) {
-    return (originUrl.slice(-1) === "/") ? originUrl.slice(0, -1) : originUrl;
+    if (originUrl.slice(-1) !== "/") {
+        return originUrl;
+    }
+    return originUrl.slice(0, -1);
 }
 
-const url = 'https://www.facebook.com';
+const url = 'https://www.facebook.com/';
 
 // removeBackSlash(url);
 console.log(removeBackSlash(url));
