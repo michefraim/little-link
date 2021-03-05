@@ -1,13 +1,4 @@
 [
-<<<<<<< HEAD
-  {
-    "originUrl": "https://www.google.com",
-    "shortUrl": "testdog"
-  },
-  {
-    "originUrl": "https://www.facebook.com",
-    "shortUrl": "armylexus"
-  },
   {
     "originUrl": "https://www.ynet.co.il",
     "shortUrl": "placegrown",
@@ -15,8 +6,3 @@
     "redirectCount": 0
   }
 ]
-=======
-  { "originUrl": "https://www.google.com", "shortUrl": "testdog" },
-  { "originUrl": "https://www.facebook.com", "shortUrl": "armylexus" }
-]
->>>>>>> parent of abc8265 (bugs fixed)
