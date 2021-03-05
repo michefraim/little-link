@@ -56,16 +56,12 @@ router.post("/new", async (request, response) => {
   }
 
   const littleLink = new LittleLink(originUrlStandardized);
-<<<<<<< HEAD
   try {
       await DataBase.addNewData(littleLink);
   }
   catch (e) {
       console.log(e);
   }
-=======
-  await DataBase.addNewData(littleLink);
->>>>>>> parent of abc8265 (bugs fixed)
   response.status(200).send(littleLink);
 });
 
