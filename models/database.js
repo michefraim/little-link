@@ -11,18 +11,16 @@ module.exports = class DataBase {
         return;
       }
     );
-    const fileDataParsed = JSON.parse(fileData);
-    return fileDataParsed;
+    return JSON.parse(fileData);
   }
 
   static async readDataBaseByUrl(url, isOrigin) {
     const fileData = await this.readDataBaseData();
-    const urlLowerCased = url.toLowerCase();
     const filteredData = fileData.filter((data) => {
       if (isOrigin) {
-        return data.originUrl === urlLowerCased;
+        return data.originUrl === url.toLowerCase();
       } else {
-        return data.shortUrl === urlLowerCased;
+        return data.shortUrl === url.toLowerCase();
       }
     });
     if (filteredData.length === 0) {
@@ -57,7 +55,27 @@ module.exports = class DataBase {
       await fs.writeFile("database.json", JSON.stringify(fileData, null, 2));
       return;
     } catch (e) {
-      return `Adding data failed ${e}`;
+      return `Adding Data Failed ${e}`;
     }
+  }
+
+  static async updateData(newData) {
+    const fileData = await this.readDataBaseData();
+    const littleLinkIndex = fileData.findIndex((obj => obj.shortUrl === newData[0].shortUrl));
+    fileData[littleLinkIndex].redirectCount = newData[0].redirectCount;
+    try {
+      await fs.writeFile("database.json", JSON.stringify(fileData, null, 2));
+      return;
+    } catch (e) {
+      return `Updating Data Failed ${e}`;
+    }
+
+    // fileData.push(newData);
+    // try {
+    //   await fs.writeFile("database.json", JSON.stringify(fileData, null, 2));
+    //   return;
+    // } catch (e) {
+    //   return `Adding data failed ${e}`;
+    // }
   }
 };

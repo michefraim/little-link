@@ -1,0 +1,23 @@
+doctype html
+html(lang='en')
+  head
+    title Stats Page
+    link(rel="icon" type="image/png" href="../../public/favicon.ico")
+    link(href="../../stats.css" rel="stylesheet" type="text/css")
+
+  body
+  div.container
+    h1 Stats For The littleLink:
+      table.table
+        tr
+          td Original Url:
+          td= originalUrl 
+        tr
+          td Short Url:
+          td= shortUrl
+        tr
+          td Creation Date:
+          td= creationDate
+        tr
+          td Times Used:
+          td= redirectCount

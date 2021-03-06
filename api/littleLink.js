@@ -22,6 +22,8 @@ router.get("/:shortUrl", async (request, response) => {
         .status(200)
         .json({ error: "No short URL found for the given input" });
     }
+    data[0].redirectCount++;
+    await DataBase.updateData(data);
     response.redirect(data[0].originUrl);
   } catch (e) {
     return response.status(500).json({ error: `failed reading the database` });
@@ -31,7 +33,6 @@ router.get("/:shortUrl", async (request, response) => {
 router.post("/new", async (request, response) => {
   const originUrl = request.body.url;
   const originUrlStandardized = removeBackSlash(originUrl);
-  console.log(originUrlStandardized);
 
   if (!validateUrl(originUrlStandardized)) {
     return response
