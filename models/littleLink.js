@@ -9,7 +9,7 @@ module.exports = class LittleLink {
   ) {
     this.originUrl = originUrl.toLowerCase();
     this.shortUrl = LittleLink.toLowerCase();
-    this.creationDate = new Date();
+    this.creationDate = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60 * 1000).toJSON().slice(0, 19).replace('T', ' ');
     this.redirectCount = 0;
   }
 };
