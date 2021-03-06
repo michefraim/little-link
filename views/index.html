@@ -1,30 +1,33 @@
 <!DOCTYPE html>
-
 <html>
   <head>
-    <title>URL Shortener</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="../public/favicon.ico" />
-    <link href="./public/style.css" rel="stylesheet" type="text/css" />
+    <link href="../public/style.css" rel="stylesheet" type="text/css" />
+    <title>URL Shortener</title>
   </head>
 
   <body>
-    <h1>LittleLink URL Shortener MicroService</h1>
-    <main>
-      <section>
-        <form action="api/littlelink/new" method="POST">
-          <fieldset>
-            <legend>URL Shortener</legend>
-            <label for="url_input">URL:</label>
-            <input
-              id="url_input"
-              type="text"
-              name="url"
-              placeholder="Enter an valid URL"
-            />
-            <input type="submit" value="POST URL" />
-          </fieldset>
-        </form>
-      </section>
-    </main>
+    <div class="container">
+      <h1 class="main-title">LittleLink URL Shortener MicroService</h1>
+      <main>
+        <section class="form">
+          <form action="api/littlelink/new" method="POST">
+            <fieldset>
+              <label for="url_input">Shorten the URL:</label>
+              <input
+                id="url_input"
+                type="text"
+                name="url"
+                placeholder="Enter a valid URL"
+              />
+              <input class="post-button" type="submit" value="POST URL" />
+            </fieldset>
+          </form>
+        </section>
+      </main>
+    </div>
   </body>
 </html>

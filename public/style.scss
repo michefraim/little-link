@@ -1,0 +1,66 @@
+$royal-blue-dark: #00296bff;
+$dark-cornflower-blue: #003f88ff;
+$usafa-blue: #00509dff;
+$mikado-yellow: #fdc500ff;
+$cyber-yellow: #ffd500ff;
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 10px;
+}
+
+body {
+    background: $usafa-blue;
+}
+
+fieldset {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: black 2px dashed;
+    border-radius: 10px;
+    height: 10vh;
+}
+
+.container {
+    text-align: center;
+    padding-top: 10vh;
+    display: flex;
+    flex-direction: column;
+    width: 80vw;
+    height: 80vh;
+    margin: auto;
+}
+
+.main-title {
+    font-size: 5rem;
+    color:$mikado-yellow;
+}
+
+.form {
+    font-size: 3.5rem;
+    color:white;
+}
+
+#url_input {
+    text-align: center;
+    font-size: 2rem;
+    background: rgba(144, 144, 145, 0.445);
+    margin: 20px;
+    height: 3vh;
+    width: 15vw;
+    padding: 10px;
+    color: white;
+    border: none;
+}
+
+.post-button {
+    height: 5vh;
+    width: 5vw;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
