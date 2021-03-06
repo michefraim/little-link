@@ -24,19 +24,25 @@ beforeAll(async () => {
   await fs.writeFile("testDatabase.json", JSON.stringify(testData, null, 2));
 });
 
+describe("Get without an short URL provided should return error", () => {
+    it("fail due to no short URL", async () => {
+        const response = await request.get("/api/littlelink/");
+        expect(response.status).toBe(404);
+        expect(JSON.parse(response.text)).toStrictEqual({"error": "Error No shortUrl given"});
+    })
+})
+
 describe("Get by short url should redirect", () => {
   it("Success redirect", async () => {
     const response = await request.get("/api/littlelink/hairsince");
     expect(response.status).toBe(302);
     expect(response.headers.location).toBe("https://www.ynet.co.il");
   });
+
   it("fail due to non existing shorturl", async () => {
     const response = await request.get("/api/littlelink/notexisitingurl");
     expect(response.status).toBe(404);
   });
+
+
 });
-// it("Corrupted file in server", async () => {
-//     await fs.writeFile("./backend/testdata.json", "[");
-//     const response = await request.post('/api/shorturl/new').type('form').send({url:"https://www.youtube.com/"});
-//     expect(response.status).toBe(500);
-// });

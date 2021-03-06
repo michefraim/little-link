@@ -9,7 +9,7 @@ const router = express.Router();
 router.use(express.json());
 
 router.get("/", (request, response) => {
-  return response.status(404).json({ message: "Error No shortUrl" });
+  return response.status(404).json({ error: "Error No shortUrl given" });
 });
 
 router.get("/:shortUrl", async (request, response) => {
@@ -25,8 +25,8 @@ router.get("/:shortUrl", async (request, response) => {
     data[0].redirectCount++;
     await DataBase.updateData(data);
     response.redirect(data[0].originUrl);
-  } catch{
-    return response.status(500).json({ error: `failed reading the database`});
+  } catch {
+    return response.status(500).json({ error: `failed reading the database` });
   }
 });
 
