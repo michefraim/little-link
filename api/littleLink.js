@@ -54,7 +54,8 @@ router.post("/new", async (request, response) => {
   } catch (e) {
     console.log(e);
   }
-  response.status(201).send(littleLink);
+  console.log(littleLink.shortUrl);
+  response.status(201).render('newLink', {shortedlink: `localhost:3000/littlelink/${littleLink.shortUrl}`});
 });
 
 module.exports = router;

@@ -5,7 +5,7 @@
 
 body {
   font-size: 10px;
-  background: #353641;
+  background: #00509dff;
 }
 
 h1 {
@@ -17,9 +17,9 @@ th {
 }
 
 td {
+  border-bottom: 1px solid black;
   line-height: 1.6;
   padding-left: 60px;
-  border-bottom: 1px solid black;
 }
 
 .container {
@@ -42,7 +42,7 @@ td {
 }
 
 .table {
-  color: white;
+  color: #dfdfdf;
   padding-top: 2vh;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -57,6 +57,12 @@ td {
 }
 
 .title {
-  color: red;
+  color: #fdc500ff;
+}
+
+.link {
+  padding-top: 1vh;
+  font-size: 2rem;
+  color: #dfdfdf;
 }
 /*# sourceMappingURL=stats.css.map */
