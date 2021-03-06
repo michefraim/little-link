@@ -1,0 +1,12 @@
+.vscode/
+.env
+node_modules/
+readme-files/
+Instructions.md
+models/test.js
+public/stats.css.map
+public/stats.scss
+public/style.scss
+public/style.css.map
+public/stats.scss
+database.json

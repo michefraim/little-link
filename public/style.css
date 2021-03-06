@@ -1,0 +1,72 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 10px;
+}
+
+body {
+  background: #00509dff;
+}
+
+fieldset {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border: black 2px dashed;
+  border-radius: 10px;
+  height: 10vh;
+}
+
+.container {
+  text-align: center;
+  padding-top: 10vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 80vw;
+  height: 80vh;
+  margin: auto;
+}
+
+.main-title {
+  font-size: 5rem;
+  color: #fdc500ff;
+}
+
+.form {
+  font-size: 3.5rem;
+  color: white;
+}
+
+#url_input {
+  text-align: center;
+  font-size: 2rem;
+  background: rgba(144, 144, 145, 0.445);
+  margin: 20px;
+  height: 3vh;
+  width: 15vw;
+  padding: 10px;
+  color: white;
+  border: none;
+}
+
+.post-button {
+  height: 5vh;
+  width: 5vw;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+/*# sourceMappingURL=style.css.map */
