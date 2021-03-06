@@ -26,7 +26,7 @@ router.get("/:shortUrl", async (request, response) => {
 
     if (data === "Not Found") {
       return response
-        .status(200)
+        .status(404)
         .json({ error: "No short URL found for the given input" });
     }
 

@@ -54,7 +54,7 @@ router.post("/new", async (request, response) => {
   } catch (e) {
     console.log(e);
   }
-  response.status(200).send(littleLink);
+  response.status(201).send(littleLink);
 });
 
 module.exports = router;
