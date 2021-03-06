@@ -19,14 +19,14 @@ router.get("/:shortUrl", async (request, response) => {
 
     if (data === "Not Found") {
       return response
-        .status(200)
+        .status(404)
         .json({ error: "No short URL found for the given input" });
     }
     data[0].redirectCount++;
     await DataBase.updateData(data);
     response.redirect(data[0].originUrl);
-  } catch (e) {
-    return response.status(500).json({ error: `failed reading the database` });
+  } catch{
+    return response.status(500).json({ error: `failed reading the database`});
   }
 });
 

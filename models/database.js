@@ -69,13 +69,5 @@ module.exports = class DataBase {
     } catch (e) {
       return `Updating Data Failed ${e}`;
     }
-
-    // fileData.push(newData);
-    // try {
-    //   await fs.writeFile("database.json", JSON.stringify(fileData, null, 2));
-    //   return;
-    // } catch (e) {
-    //   return `Adding data failed ${e}`;
-    // }
   }
 };
