@@ -6,11 +6,20 @@
 body {
   font-size: 10px;
   background: #353641;
-  color: white;
 }
 
 h1 {
   font-size: 3rem;
+}
+
+th {
+  padding-left: 60px;
+}
+
+td {
+  line-height: 1.6;
+  padding-left: 60px;
+  border-bottom: 1px solid black;
 }
 
 .container {
@@ -28,12 +37,13 @@ h1 {
       -ms-flex-align: center;
           align-items: center;
   width: 80%;
-  height: 80vh;
+  height: 40vh;
   margin: auto;
 }
 
 .table {
-  padding-top: 5vh;
+  color: white;
+  padding-top: 2vh;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -44,5 +54,9 @@ h1 {
   font-size: 1.5rem;
   line-height: 1.5;
   text-align: center;
+}
+
+.title {
+  color: red;
 }
 /*# sourceMappingURL=stats.css.map */

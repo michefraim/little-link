@@ -1,4 +1,4 @@
-doctype html
+doctype html 
 html(lang='en')
   head
     title Stats Page
@@ -7,17 +7,16 @@ html(lang='en')
 
   body
   div.container
-    h1 Stats For The littleLink:
-      table.table
+    h1.title Stats For The littleLink:
+    table.table
+      tr
+        th  Original Url:
+        th  Short Url:
+        th  Creation Date:
+        th  Times Used:
+      each data in datas
         tr
-          td Original Url:
-          td= originalUrl 
-        tr
-          td Short Url:
-          td= shortUrl
-        tr
-          td Creation Date:
-          td= creationDate
-        tr
-          td Times Used:
-          td= redirectCount
+          td= data.originUrl 
+          td= data.shortUrl
+          td= data.creationDate
+          td= data.redirectCount
