@@ -1,10 +1,12 @@
 "use strict";
 const fs = require("fs").promises;
+let dataBasePath =
+  process.env.NODE_ENV == "test" ? "./testDatabase.json" : "./database.json";
 
 module.exports = class DataBase {
   static async readDataBaseData() {
     const fileData = await fs.readFile(
-      "./database.json",
+      dataBasePath,
       "utf8",
       (error, data) => {
         if (error) throw error;
@@ -52,7 +54,7 @@ module.exports = class DataBase {
     const fileData = await this.readDataBaseData();
     fileData.push(newData);
     try {
-      await fs.writeFile("database.json", JSON.stringify(fileData, null, 2));
+      await fs.writeFile(dataBasePath, JSON.stringify(fileData, null, 2));
       return;
     } catch (e) {
       return `Adding Data Failed ${e}`;
@@ -61,10 +63,12 @@ module.exports = class DataBase {
 
   static async updateData(newData) {
     const fileData = await this.readDataBaseData();
-    const littleLinkIndex = fileData.findIndex((obj => obj.shortUrl === newData[0].shortUrl));
+    const littleLinkIndex = fileData.findIndex(
+      (obj) => obj.shortUrl === newData[0].shortUrl
+    );
     fileData[littleLinkIndex].redirectCount = newData[0].redirectCount;
     try {
-      await fs.writeFile("database.json", JSON.stringify(fileData, null, 2));
+      await fs.writeFile(dataBasePath, JSON.stringify(fileData, null, 2));
       return;
     } catch (e) {
       return `Updating Data Failed ${e}`;

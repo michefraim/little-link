@@ -37,13 +37,7 @@ router.post("/new", async (request, response) => {
   if (!validateUrl(originUrlStandardized)) {
     return response
       .status(400)
-      .json({ message: "Bad URL entered", succuss: false });
-  }
-
-  if (!LittleLink.isUrlOnline(originUrlStandardized)) {
-    return response
-      .status(400)
-      .json({ message: "The URL entered is not up", succuss: false });
+      .json({ error: "Bad URL entered", success: false })
   }
 
   if (await DataBase.doesUrlAlreadyExists(originUrlStandardized)) {
